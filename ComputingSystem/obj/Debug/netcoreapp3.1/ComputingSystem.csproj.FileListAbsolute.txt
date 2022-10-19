@@ -1,0 +1,17 @@
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\bin\Debug\netcoreapp3.1\ComputingSystem.exe
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\bin\Debug\netcoreapp3.1\ComputingSystem.deps.json
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\bin\Debug\netcoreapp3.1\ComputingSystem.runtimeconfig.json
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\bin\Debug\netcoreapp3.1\ComputingSystem.runtimeconfig.dev.json
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\bin\Debug\netcoreapp3.1\ComputingSystem.dll
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\bin\Debug\netcoreapp3.1\ComputingSystem.pdb
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.csproj.GenerateResource.cache
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.AssemblyInfo.cs
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.dll
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.pdb
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.genruntimeconfig.cache
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.csproj.CopyComplete
+C:\Users\User\source\repos\ComputingSystem\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.FrmDetailed.resources
