@@ -72,8 +72,8 @@ namespace ComputingSystem
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -180,6 +180,7 @@ namespace ComputingSystem
             this.workingCycle.TabIndex = 12;
             this.workingCycle.Text = "Рабочий такт";
             this.workingCycle.UseVisualStyleBackColor = true;
+            this.workingCycle.Click += new System.EventHandler(this.workingCycle_Click);
             // 
             // end
             // 
@@ -467,6 +468,15 @@ namespace ComputingSystem
             this.groupBox10.TabIndex = 43;
             this.groupBox10.TabStop = false;
             // 
+            // groupBox13
+            // 
+            this.groupBox13.Location = new System.Drawing.Point(384, 45);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(400, 210);
+            this.groupBox13.TabIndex = 28;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "groupBox13";
+            // 
             // groupBox11
             // 
             this.groupBox11.Controls.Add(this.label9);
@@ -476,15 +486,6 @@ namespace ComputingSystem
             this.groupBox11.Size = new System.Drawing.Size(386, 193);
             this.groupBox11.TabIndex = 44;
             this.groupBox11.TabStop = false;
-            // 
-            // groupBox13
-            // 
-            this.groupBox13.Location = new System.Drawing.Point(384, 45);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(400, 210);
-            this.groupBox13.TabIndex = 28;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "groupBox13";
             // 
             // groupBox12
             // 

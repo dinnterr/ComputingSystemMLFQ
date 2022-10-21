@@ -19,6 +19,9 @@ namespace ComputingSystem
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmDetailed());
 
+
+
+
             /*Process proc = new Process(4, 100);
             Console.WriteLine(proc);
             Resource res = new Resource();

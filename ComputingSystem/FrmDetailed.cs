@@ -17,6 +17,23 @@ namespace ComputingSystem
             InitializeComponent();
         }
 
-        
+        private void workingCycle_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("!!!!!");
+            Model model = new Model();
+            Settings settings = new Settings();
+            settings.ValueOfRAMSize = 32000;
+            settings.MinValueOfBurstTime = 3;
+            settings.MaxValueOfBurstTime = 7;
+            settings.Intensity = 0.9;
+            IdGenerator id = new IdGenerator();
+            for (int i = 0; i < 10; i++)
+            {
+                model.WorkingCycle();
+                MessageBox.Show(model.cpu.IsFree().ToString());
+               // MessageBox.Show(model.device.IsFree().ToString());
+            }
+           
+        }
     }
 }

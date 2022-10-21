@@ -29,17 +29,18 @@ namespace ComputingSystem
             ram.Save(modelSettings.ValueOfRAMSize);
             memoryManager.Save(ram.Size);
         }
-        void WorkingCycle()
+        public void WorkingCycle()
         {
             clock.WorkingCycle();
             if (processRand.NextDouble() <= modelSettings.Intensity)
             {
                 Process proc = new Process(idGen.Id,
                     processRand.Next(modelSettings.MinValueOfAddrSpace, modelSettings.MaxValueOfAddrSpace + 1));
-                if (memoryManager.Allocate(proc) != null)
-                {
+               if (memoryManager.Allocate(proc) != null)
+               {
                     proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime,
                         modelSettings.MaxValueOfBurstTime + 1);
+                    proc.FreeingAResource += FreeingResourceEventHandler;
                     readyQueue.Put(proc);
                     if (cpu.IsFree())
                     {
@@ -60,9 +61,61 @@ namespace ComputingSystem
             deviceQueue.Clear();
         }
 
+        private void FreeingResourceEventHandler (object sender, EventArgs e)
+        {
+            Process proc = sender as Process;
+            if (proc.Status == ProcessStatus.waiting) //Процесс покидает внешнее устройство
+            {
+                device.Clear();
+                proc.Status = ProcessStatus.ready;
+                proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime,
+                         modelSettings.MaxValueOfBurstTime + 1);
+                proc.ResetWorkTime();
+                
+                readyQueue = readyQueue.Put(proc);
+
+                if(cpu.IsFree())
+                {
+                   readyQueue = cpuScheduler.Session();
+                }
+
+                if (deviceQueue.Count != 0) 
+                {
+                   deviceQueue = deviceScheduler.Session();
+                }
+            }
+            else //Процесс покидает процессор
+            {
+                cpu.Clear();           
+                if(readyQueue.Count != 0)
+                {
+                   readyQueue = cpuScheduler.Session();
+                }
+             
+                proc.Status = processRand.Next(0, 2) == 0 ? ProcessStatus.terminated :
+                        ProcessStatus.waiting;
+                if(proc.Status == ProcessStatus.terminated)
+                {
+                    memoryManager.Free(proc);
+                    proc.FreeingAResource -= FreeingResourceEventHandler;
+                }
+                else
+                {
+                    proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime,
+                        modelSettings.MaxValueOfBurstTime + 1);
+                    proc.ResetWorkTime();
+                    deviceQueue = deviceQueue.Put(proc);
+                    if(device.IsFree())
+                    {
+                        deviceQueue = deviceScheduler.Session();
+                    }
+                }
+            }
+        }
+
         private SystemClock clock;
-        private Resource cpu;
-        private Resource device;
+        public Resource cpu;
+        public Resource device;
         private IdGenerator idGen;
         private IQueueable<Process> deviceQueue;
         private IQueueable<Process> readyQueue;
@@ -72,5 +125,6 @@ namespace ComputingSystem
         private Settings modelSettings;
         private Random processRand;
         private Memory ram;
+
     }
 }
