@@ -10,10 +10,12 @@ namespace ComputingSystem
         {
             Size = size;
             occupiedSize = 0;
+            FreeSize = size;
         }
         public void Clear()
         {
             occupiedSize = 0;
+            FreeSize = Size;
         }
         public long Size
         {
@@ -22,8 +24,8 @@ namespace ComputingSystem
         }
         public long OccupiedSize
         {
-            get;
-            set;
+            get { return occupiedSize; }
+            set { occupiedSize = value; }
         }
         public long FreeSize
         {

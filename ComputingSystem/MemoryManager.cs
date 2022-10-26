@@ -6,9 +6,9 @@ namespace ComputingSystem
 {
     class MemoryManager
     {
-        public void Save(long size)
+        public void Save(Memory mem)
         {
-            memory.Save(size);
+            memory = mem;
         }
 
         public Memory Allocate(Process process)

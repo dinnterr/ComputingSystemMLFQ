@@ -24,10 +24,10 @@ namespace ComputingSystem
             ram = new Memory();
         }
 
-        void SaveSettings()
+        public void SaveSettings()
         {
             ram.Save(modelSettings.ValueOfRAMSize);
-            memoryManager.Save(ram.Size);
+            memoryManager.Save(ram);
         }
         public void WorkingCycle()
         {
@@ -38,10 +38,11 @@ namespace ComputingSystem
                     processRand.Next(modelSettings.MinValueOfAddrSpace, modelSettings.MaxValueOfAddrSpace + 1));
                if (memoryManager.Allocate(proc) != null)
                {
+                    
                     proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime,
                         modelSettings.MaxValueOfBurstTime + 1);
-                    proc.FreeingAResource += FreeingResourceEventHandler;
-                    readyQueue.Put(proc);
+                    subscribe(proc);
+                    readyQueue = readyQueue.Put(proc);
                     if (cpu.IsFree())
                     {
                         cpuScheduler.Session();
@@ -97,7 +98,7 @@ namespace ComputingSystem
                 if(proc.Status == ProcessStatus.terminated)
                 {
                     memoryManager.Free(proc);
-                    proc.FreeingAResource -= FreeingResourceEventHandler;
+                    unsubscribe(proc);
                 }
                 else
                 {
@@ -112,19 +113,61 @@ namespace ComputingSystem
                 }
             }
         }
+        private void subscribe(Process proc)
+        {
+            if (proc != null)
+            {
+                proc.FreeingAResource += FreeingResourceEventHandler;
+            }
+        }
+
+        private void unsubscribe(Process proc)
+        {
+            if (proc != null)
+            {
+                proc.FreeingAResource -= FreeingResourceEventHandler;
+            }
+        }
+
 
         private SystemClock clock;
-        public Resource cpu;
-        public Resource device;
+        private Resource cpu;//
+        private Resource device;//
         private IdGenerator idGen;
-        private IQueueable<Process> deviceQueue;
-        private IQueueable<Process> readyQueue;
+        private IQueueable<Process> deviceQueue;//
+        private IQueueable<Process> readyQueue;//
         private CPUScheduler cpuScheduler;
         private DeviceScheduler deviceScheduler;
         private MemoryManager memoryManager;
-        private Settings modelSettings;
+        private Settings modelSettings;//
         private Random processRand;
         private Memory ram;
 
+        public IQueueable<Process> ReadyQueue
+        {
+            get { return readyQueue; }
+            set { readyQueue = value; }
+        }
+
+        public IQueueable<Process> DeviceQueue
+        {
+            get { return deviceQueue; }
+            set { deviceQueue = value; }
+        }
+
+        public Settings ModelSettings
+        {
+            get { return modelSettings; }
+        }
+
+        public Resource Device
+        {
+            get { return device; }
+        }
+
+        public Resource Cpu
+        {
+            get { return cpu; }
+        }
     }
 }
