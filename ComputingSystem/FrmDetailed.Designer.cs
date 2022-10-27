@@ -1,7 +1,6 @@
-﻿
-namespace ComputingSystem
+﻿namespace ComputingSystem
 {
-    partial class FrmDetailed
+    partial class FrmDetailed 
     {
         /// <summary>
         ///  Required designer variable.
@@ -20,7 +19,6 @@ namespace ComputingSystem
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -29,16 +27,13 @@ namespace ComputingSystem
         /// </summary>
         private void InitializeComponent()
         {
-            this.queueToCPU = new System.Windows.Forms.TextBox();
-            this.queueToDevice = new System.Windows.Forms.TextBox();
-            this.CPU = new System.Windows.Forms.TextBox();
-            this.Device = new System.Windows.Forms.TextBox();
-            this.intensity = new System.Windows.Forms.DomainUpDown();
-            this.minCPU = new System.Windows.Forms.DomainUpDown();
-            this.maxCPU = new System.Windows.Forms.DomainUpDown();
-            this.RAM = new System.Windows.Forms.DomainUpDown();
-            this.minSize = new System.Windows.Forms.DomainUpDown();
-            this.maxSize = new System.Windows.Forms.DomainUpDown();
+            this.tbCPU = new System.Windows.Forms.TextBox();
+            this.tbDevice = new System.Windows.Forms.TextBox();
+            this.nudIntensity = new System.Windows.Forms.DomainUpDown();
+            this.nudBurstMin = new System.Windows.Forms.DomainUpDown();
+            this.nudBurstMax = new System.Windows.Forms.DomainUpDown();
+            this.nudAddrSpaceMin = new System.Windows.Forms.DomainUpDown();
+            this.nudAddrSpaceMax = new System.Windows.Forms.DomainUpDown();
             this.save = new System.Windows.Forms.Button();
             this.workingCycle = new System.Windows.Forms.Button();
             this.end = new System.Windows.Forms.Button();
@@ -46,8 +41,8 @@ namespace ComputingSystem
             this.manualMode = new System.Windows.Forms.RadioButton();
             this.autoMode = new System.Windows.Forms.RadioButton();
             this.typeOfWork = new System.Windows.Forms.TextBox();
-            this.freeSize = new System.Windows.Forms.TextBox();
-            this.occupiedSize = new System.Windows.Forms.TextBox();
+            this.tbFreeMemValue = new System.Windows.Forms.TextBox();
+            this.tbOccupiedMemValue = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -66,6 +61,7 @@ namespace ComputingSystem
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbRamSize = new System.Windows.Forms.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -74,7 +70,9 @@ namespace ComputingSystem
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.lbCPUQueue = new System.Windows.Forms.ListBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.lbDeviceQueue = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -89,79 +87,56 @@ namespace ComputingSystem
             this.groupBox12.SuspendLayout();
             this.SuspendLayout();
             // 
-            // queueToCPU
+            // tbCPU
             // 
-            this.queueToCPU.Location = new System.Drawing.Point(8, 25);
-            this.queueToCPU.Multiline = true;
-            this.queueToCPU.Name = "queueToCPU";
-            this.queueToCPU.Size = new System.Drawing.Size(378, 165);
-            this.queueToCPU.TabIndex = 0;
+            this.tbCPU.Location = new System.Drawing.Point(3, 21);
+            this.tbCPU.Name = "tbCPU";
+            this.tbCPU.ReadOnly = true;
+            this.tbCPU.Size = new System.Drawing.Size(378, 23);
+            this.tbCPU.TabIndex = 2;
             // 
-            // queueToDevice
+            // tbDevice
             // 
-            this.queueToDevice.Location = new System.Drawing.Point(9, 20);
-            this.queueToDevice.Multiline = true;
-            this.queueToDevice.Name = "queueToDevice";
-            this.queueToDevice.Size = new System.Drawing.Size(378, 165);
-            this.queueToDevice.TabIndex = 1;
+            this.tbDevice.Location = new System.Drawing.Point(4, 24);
+            this.tbDevice.Name = "tbDevice";
+            this.tbDevice.ReadOnly = true;
+            this.tbDevice.Size = new System.Drawing.Size(378, 23);
+            this.tbDevice.TabIndex = 3;
             // 
-            // CPU
+            // nudIntensity
             // 
-            this.CPU.Location = new System.Drawing.Point(3, 21);
-            this.CPU.Name = "CPU";
-            this.CPU.ReadOnly = true;
-            this.CPU.Size = new System.Drawing.Size(378, 23);
-            this.CPU.TabIndex = 2;
+            this.nudIntensity.Location = new System.Drawing.Point(6, 77);
+            this.nudIntensity.Name = "nudIntensity";
+            this.nudIntensity.Size = new System.Drawing.Size(122, 23);
+            this.nudIntensity.TabIndex = 5;
             // 
-            // Device
+            // nudBurstMin
             // 
-            this.Device.Location = new System.Drawing.Point(4, 24);
-            this.Device.Name = "Device";
-            this.Device.ReadOnly = true;
-            this.Device.Size = new System.Drawing.Size(378, 23);
-            this.Device.TabIndex = 3;
+            this.nudBurstMin.Location = new System.Drawing.Point(4, 70);
+            this.nudBurstMin.Name = "nudBurstMin";
+            this.nudBurstMin.Size = new System.Drawing.Size(122, 23);
+            this.nudBurstMin.TabIndex = 6;
             // 
-            // intensity
+            // nudBurstMax
             // 
-            this.intensity.Location = new System.Drawing.Point(6, 77);
-            this.intensity.Name = "intensity";
-            this.intensity.Size = new System.Drawing.Size(122, 23);
-            this.intensity.TabIndex = 5;
+            this.nudBurstMax.Location = new System.Drawing.Point(3, 71);
+            this.nudBurstMax.Name = "nudBurstMax";
+            this.nudBurstMax.Size = new System.Drawing.Size(122, 23);
+            this.nudBurstMax.TabIndex = 7;
             // 
-            // minCPU
+            // nudAddrSpaceMin
             // 
-            this.minCPU.Location = new System.Drawing.Point(4, 70);
-            this.minCPU.Name = "minCPU";
-            this.minCPU.Size = new System.Drawing.Size(122, 23);
-            this.minCPU.TabIndex = 6;
+            this.nudAddrSpaceMin.Location = new System.Drawing.Point(4, 75);
+            this.nudAddrSpaceMin.Name = "nudAddrSpaceMin";
+            this.nudAddrSpaceMin.Size = new System.Drawing.Size(122, 23);
+            this.nudAddrSpaceMin.TabIndex = 9;
             // 
-            // maxCPU
+            // nudAddrSpaceMax
             // 
-            this.maxCPU.Location = new System.Drawing.Point(3, 71);
-            this.maxCPU.Name = "maxCPU";
-            this.maxCPU.Size = new System.Drawing.Size(122, 23);
-            this.maxCPU.TabIndex = 7;
-            // 
-            // RAM
-            // 
-            this.RAM.Location = new System.Drawing.Point(1, 70);
-            this.RAM.Name = "RAM";
-            this.RAM.Size = new System.Drawing.Size(122, 23);
-            this.RAM.TabIndex = 8;
-            // 
-            // minSize
-            // 
-            this.minSize.Location = new System.Drawing.Point(4, 75);
-            this.minSize.Name = "minSize";
-            this.minSize.Size = new System.Drawing.Size(122, 23);
-            this.minSize.TabIndex = 9;
-            // 
-            // maxSize
-            // 
-            this.maxSize.Location = new System.Drawing.Point(7, 74);
-            this.maxSize.Name = "maxSize";
-            this.maxSize.Size = new System.Drawing.Size(122, 23);
-            this.maxSize.TabIndex = 10;
+            this.nudAddrSpaceMax.Location = new System.Drawing.Point(7, 74);
+            this.nudAddrSpaceMax.Name = "nudAddrSpaceMax";
+            this.nudAddrSpaceMax.Size = new System.Drawing.Size(122, 23);
+            this.nudAddrSpaceMax.TabIndex = 10;
             // 
             // save
             // 
@@ -230,21 +205,21 @@ namespace ComputingSystem
             this.typeOfWork.Size = new System.Drawing.Size(69, 23);
             this.typeOfWork.TabIndex = 17;
             // 
-            // freeSize
+            // tbFreeMemValue
             // 
-            this.freeSize.Location = new System.Drawing.Point(179, 14);
-            this.freeSize.Name = "freeSize";
-            this.freeSize.ReadOnly = true;
-            this.freeSize.Size = new System.Drawing.Size(206, 23);
-            this.freeSize.TabIndex = 18;
+            this.tbFreeMemValue.Location = new System.Drawing.Point(179, 14);
+            this.tbFreeMemValue.Name = "tbFreeMemValue";
+            this.tbFreeMemValue.ReadOnly = true;
+            this.tbFreeMemValue.Size = new System.Drawing.Size(206, 23);
+            this.tbFreeMemValue.TabIndex = 18;
             // 
-            // occupiedSize
+            // tbOccupiedMemValue
             // 
-            this.occupiedSize.Location = new System.Drawing.Point(618, 14);
-            this.occupiedSize.Name = "occupiedSize";
-            this.occupiedSize.ReadOnly = true;
-            this.occupiedSize.Size = new System.Drawing.Size(153, 23);
-            this.occupiedSize.TabIndex = 19;
+            this.tbOccupiedMemValue.Location = new System.Drawing.Point(618, 14);
+            this.tbOccupiedMemValue.Name = "tbOccupiedMemValue";
+            this.tbOccupiedMemValue.ReadOnly = true;
+            this.tbOccupiedMemValue.Size = new System.Drawing.Size(153, 23);
+            this.tbOccupiedMemValue.TabIndex = 19;
             // 
             // label1
             // 
@@ -361,7 +336,7 @@ namespace ComputingSystem
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.intensity);
+            this.groupBox1.Controls.Add(this.nudIntensity);
             this.groupBox1.Location = new System.Drawing.Point(5, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(129, 100);
@@ -371,7 +346,7 @@ namespace ComputingSystem
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.minCPU);
+            this.groupBox2.Controls.Add(this.nudBurstMin);
             this.groupBox2.Location = new System.Drawing.Point(139, 6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(132, 94);
@@ -381,7 +356,7 @@ namespace ComputingSystem
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.maxCPU);
+            this.groupBox3.Controls.Add(this.nudBurstMax);
             this.groupBox3.Location = new System.Drawing.Point(266, 4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(126, 95);
@@ -390,18 +365,26 @@ namespace ComputingSystem
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.cbRamSize);
             this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.RAM);
             this.groupBox4.Location = new System.Drawing.Point(397, 5);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(129, 94);
+            this.groupBox4.Size = new System.Drawing.Size(129, 95);
             this.groupBox4.TabIndex = 37;
             this.groupBox4.TabStop = false;
+            // 
+            // cbRamSize
+            // 
+            this.cbRamSize.FormattingEnabled = true;
+            this.cbRamSize.Location = new System.Drawing.Point(1, 68);
+            this.cbRamSize.Name = "cbRamSize";
+            this.cbRamSize.Size = new System.Drawing.Size(121, 23);
+            this.cbRamSize.TabIndex = 24;
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.label5);
-            this.groupBox5.Controls.Add(this.minSize);
+            this.groupBox5.Controls.Add(this.nudAddrSpaceMin);
             this.groupBox5.Location = new System.Drawing.Point(526, 0);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(133, 100);
@@ -411,7 +394,7 @@ namespace ComputingSystem
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.label6);
-            this.groupBox6.Controls.Add(this.maxSize);
+            this.groupBox6.Controls.Add(this.nudAddrSpaceMax);
             this.groupBox6.Location = new System.Drawing.Point(658, 0);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(136, 106);
@@ -423,8 +406,8 @@ namespace ComputingSystem
             this.groupBox7.Controls.Add(this.label13);
             this.groupBox7.Controls.Add(this.label12);
             this.groupBox7.Controls.Add(this.label11);
-            this.groupBox7.Controls.Add(this.occupiedSize);
-            this.groupBox7.Controls.Add(this.freeSize);
+            this.groupBox7.Controls.Add(this.tbOccupiedMemValue);
+            this.groupBox7.Controls.Add(this.tbFreeMemValue);
             this.groupBox7.Location = new System.Drawing.Point(5, 356);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(780, 49);
@@ -450,7 +433,7 @@ namespace ComputingSystem
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.label8);
-            this.groupBox9.Controls.Add(this.Device);
+            this.groupBox9.Controls.Add(this.tbDevice);
             this.groupBox9.Location = new System.Drawing.Point(394, 112);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(386, 50);
@@ -461,7 +444,7 @@ namespace ComputingSystem
             // 
             this.groupBox10.Controls.Add(this.groupBox13);
             this.groupBox10.Controls.Add(this.label7);
-            this.groupBox10.Controls.Add(this.CPU);
+            this.groupBox10.Controls.Add(this.tbCPU);
             this.groupBox10.Location = new System.Drawing.Point(9, 115);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(385, 47);
@@ -479,23 +462,41 @@ namespace ComputingSystem
             // 
             // groupBox11
             // 
+            this.groupBox11.Controls.Add(this.lbCPUQueue);
             this.groupBox11.Controls.Add(this.label9);
-            this.groupBox11.Controls.Add(this.queueToCPU);
             this.groupBox11.Location = new System.Drawing.Point(6, 160);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(386, 193);
             this.groupBox11.TabIndex = 44;
             this.groupBox11.TabStop = false;
             // 
+            // lbCPUQueue
+            // 
+            this.lbCPUQueue.FormattingEnabled = true;
+            this.lbCPUQueue.ItemHeight = 15;
+            this.lbCPUQueue.Location = new System.Drawing.Point(8, 25);
+            this.lbCPUQueue.Name = "lbCPUQueue";
+            this.lbCPUQueue.Size = new System.Drawing.Size(375, 154);
+            this.lbCPUQueue.TabIndex = 30;
+            // 
             // groupBox12
             // 
+            this.groupBox12.Controls.Add(this.lbDeviceQueue);
             this.groupBox12.Controls.Add(this.label10);
-            this.groupBox12.Controls.Add(this.queueToDevice);
             this.groupBox12.Location = new System.Drawing.Point(397, 165);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(397, 191);
             this.groupBox12.TabIndex = 45;
             this.groupBox12.TabStop = false;
+            // 
+            // lbDeviceQueue
+            // 
+            this.lbDeviceQueue.FormattingEnabled = true;
+            this.lbDeviceQueue.ItemHeight = 15;
+            this.lbDeviceQueue.Location = new System.Drawing.Point(9, 20);
+            this.lbDeviceQueue.Name = "lbDeviceQueue";
+            this.lbDeviceQueue.Size = new System.Drawing.Size(375, 154);
+            this.lbDeviceQueue.TabIndex = 31;
             // 
             // FrmDetailed
             // 
@@ -531,25 +532,19 @@ namespace ComputingSystem
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
             this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox queueToCPU;
-        private System.Windows.Forms.TextBox queueToDevice;
-        private System.Windows.Forms.TextBox CPU;
-        private System.Windows.Forms.TextBox Device;
-        private System.Windows.Forms.DomainUpDown intensity;
-        private System.Windows.Forms.DomainUpDown minCPU;
-        private System.Windows.Forms.DomainUpDown maxCPU;
-        private System.Windows.Forms.DomainUpDown RAM;
-        private System.Windows.Forms.DomainUpDown minSize;
-        private System.Windows.Forms.DomainUpDown maxSize;
+        private System.Windows.Forms.TextBox tbCPU;
+        private System.Windows.Forms.TextBox tbDevice;
+        private System.Windows.Forms.DomainUpDown nudIntensity;
+        private System.Windows.Forms.DomainUpDown nudBurstMin;
+        private System.Windows.Forms.DomainUpDown nudBurstMax;
+        private System.Windows.Forms.DomainUpDown nudAddrSpaceMin;
+        private System.Windows.Forms.DomainUpDown nudAddrSpaceMax;
         private System.Windows.Forms.Button save;
         private System.Windows.Forms.Button workingCycle;
         private System.Windows.Forms.Button end;
@@ -557,8 +552,8 @@ namespace ComputingSystem
         private System.Windows.Forms.RadioButton manualMode;
         private System.Windows.Forms.RadioButton autoMode;
         private System.Windows.Forms.TextBox typeOfWork;
-        private System.Windows.Forms.TextBox freeSize;
-        private System.Windows.Forms.TextBox occupiedSize;
+        private System.Windows.Forms.TextBox tbFreeMemValue;
+        private System.Windows.Forms.TextBox tbOccupiedMemValue;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -586,6 +581,9 @@ namespace ComputingSystem
         private System.Windows.Forms.GroupBox groupBox13;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.ComboBox cbRamSize;
+        private System.Windows.Forms.ListBox lbCPUQueue;
+        private System.Windows.Forms.ListBox lbDeviceQueue;
     }
 }
 

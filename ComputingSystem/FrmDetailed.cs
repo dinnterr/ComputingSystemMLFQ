@@ -15,6 +15,9 @@ namespace ComputingSystem
         public FrmDetailed()
         {
             InitializeComponent();
+            cbRamSize.SelectedItem = cbRamSize.Items[0];
+            viewDetailed = new ViewDetailed(new Model(), new Controller(), this);
+            viewDetailed.DataBind();
         }
 
         private void workingCycle_Click(object sender, EventArgs e)
@@ -68,8 +71,27 @@ namespace ComputingSystem
                     //Console.WriteLine("Первый в очереди к внешнему устройству: {0}", model.DeviceQueue.Item());
                     MessageBox.Show("Первый в очереди к внешнему устройству: " + model.DeviceQueue.Item());
                 }
+
             }
 
         }
+        private ViewDetailed viewDetailed
+        {
+            get;
+            set;
+        }
+
+        public ListBox LbCPUQueue { get { return lbCPUQueue; } }
+        public ListBox LbDeviceQueue { get { return lbDeviceQueue; } }
+        public TextBox TbCPU { get { return tbCPU; } }
+        public TextBox TbDevice { get { return tbDevice; } }
+        public TextBox TbFreeMemValue { get { return tbFreeMemValue; } }
+        public TextBox TbOccupiedMemValue { get { return tbOccupiedMemValue; } }
+
+        public DomainUpDown NudIntensity { get { return nudIntensity; } }
+        public DomainUpDown NudBurstMin { get { return nudBurstMin; } }
+        public DomainUpDown NudBurstMax { get { return nudBurstMax; } }
+        public DomainUpDown NudAddrSpaceMin { get { return nudAddrSpaceMin; } }
+        public DomainUpDown NudAddrSpaceMax { get { return nudAddrSpaceMax; } }
     }
 }

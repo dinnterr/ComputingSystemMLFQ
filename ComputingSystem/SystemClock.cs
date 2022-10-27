@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ComputingSystem
 {
-    class SystemClock
+    class SystemClock : INotifyPropertyChanged
     {
         public void WorkingCycle()
         {
-            clock++;
+            Clock++;
         }
 
         public void Clear()
         {
-            clock = 0;
+            Clock = 0;
         }
 
         public long Clock
@@ -25,8 +27,21 @@ namespace ComputingSystem
             private set
             {
                 clock = value;
+                OnPropertyChanged();
             }
         }
+
+        //издатель
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
         private long clock;
     }
 }

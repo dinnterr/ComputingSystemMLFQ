@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using Queues;
 using Structures;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace ComputingSystem
 {
-    class Model
+      class Model : INotifyPropertyChanged
     {
         public Model()
         {
-            clock = new SystemClock();
+            Clock = new SystemClock();
             deviceQueue = new FIFOQueue<Process, SimpleArray<Process>>(new SimpleArray<Process>());
             readyQueue = new PriorityQueue<Process, BinaryHeap<Process>>(new BinaryHeap<Process>());
             modelSettings = new Settings();
@@ -29,9 +31,10 @@ namespace ComputingSystem
             ram.Save(modelSettings.ValueOfRAMSize);
             memoryManager.Save(ram);
         }
+
         public void WorkingCycle()
         {
-            clock.WorkingCycle();
+            Clock.WorkingCycle();
             if (processRand.NextDouble() <= modelSettings.Intensity)
             {
                 Process proc = new Process(idGen.Id,
@@ -41,7 +44,7 @@ namespace ComputingSystem
                     
                     proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime,
                         modelSettings.MaxValueOfBurstTime + 1);
-                    subscribe(proc);
+                    Subscribe(proc);
                     readyQueue = readyQueue.Put(proc);
                     if (cpu.IsFree())
                     {
@@ -53,13 +56,15 @@ namespace ComputingSystem
             device.WorkingCycle();
         }
 
-        void Clear()
+        public void Clear()
         {
             cpu.Clear();
             device.Clear();
             ram.Clear();
-            readyQueue.Clear();
-            deviceQueue.Clear();
+            readyQueue = readyQueue.Clear();
+            deviceQueue = deviceQueue.Clear();
+            Clock.Clear();
+            idGen.Clear();
         }
 
         private void FreeingResourceEventHandler (object sender, EventArgs e)
@@ -69,8 +74,7 @@ namespace ComputingSystem
             {
                 device.Clear();
                 proc.Status = ProcessStatus.ready;
-                proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime,
-                         modelSettings.MaxValueOfBurstTime + 1);
+                proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime, modelSettings.MaxValueOfBurstTime + 1);
                 proc.ResetWorkTime();
                 
                 readyQueue = readyQueue.Put(proc);
@@ -78,11 +82,13 @@ namespace ComputingSystem
                 if(cpu.IsFree())
                 {
                    readyQueue = cpuScheduler.Session();
+                   Subscribe(Cpu.ActiveProcess);
                 }
 
                 if (deviceQueue.Count != 0) 
                 {
                    deviceQueue = deviceScheduler.Session();
+                   Subscribe(Device.ActiveProcess);
                 }
             }
             else //Процесс покидает процессор
@@ -93,17 +99,15 @@ namespace ComputingSystem
                    readyQueue = cpuScheduler.Session();
                 }
              
-                proc.Status = processRand.Next(0, 2) == 0 ? ProcessStatus.terminated :
-                        ProcessStatus.waiting;
+                proc.Status = processRand.Next(0, 2) == 0 ? ProcessStatus.terminated : ProcessStatus.waiting;
                 if(proc.Status == ProcessStatus.terminated)
                 {
                     memoryManager.Free(proc);
-                    unsubscribe(proc);
+                    Unsubscribe(proc);
                 }
                 else
                 {
-                    proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime,
-                        modelSettings.MaxValueOfBurstTime + 1);
+                    proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime, modelSettings.MaxValueOfBurstTime + 1);
                     proc.ResetWorkTime();
                     deviceQueue = deviceQueue.Put(proc);
                     if(device.IsFree())
@@ -113,7 +117,7 @@ namespace ComputingSystem
                 }
             }
         }
-        private void subscribe(Process proc)
+        private void Subscribe(Process proc)
         {
             if (proc != null)
             {
@@ -121,7 +125,7 @@ namespace ComputingSystem
             }
         }
 
-        private void unsubscribe(Process proc)
+        private void Unsubscribe(Process proc)
         {
             if (proc != null)
             {
@@ -129,30 +133,48 @@ namespace ComputingSystem
             }
         }
 
+        //Издатель события PropertyChangedHandler
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        private SystemClock clock;
-        private Resource cpu;//
-        private Resource device;//
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public readonly SystemClock Clock;
+        private Resource cpu;
+        private Resource device;
         private IdGenerator idGen;
-        private IQueueable<Process> deviceQueue;//
-        private IQueueable<Process> readyQueue;//
+        private IQueueable<Process> deviceQueue;
+        private IQueueable<Process> readyQueue;
         private CPUScheduler cpuScheduler;
         private DeviceScheduler deviceScheduler;
         private MemoryManager memoryManager;
-        private Settings modelSettings;//
+        private Settings modelSettings;
         private Random processRand;
-        private Memory ram;
+        public readonly Memory ram;
 
         public IQueueable<Process> ReadyQueue
         {
             get { return readyQueue; }
-            set { readyQueue = value; }
+            set 
+            { 
+                readyQueue = value;
+                OnPropertyChanged();
+            }
         }
 
         public IQueueable<Process> DeviceQueue
         {
             get { return deviceQueue; }
-            set { deviceQueue = value; }
+            set 
+            { 
+                deviceQueue = value;
+                OnPropertyChanged();
+            }
         }
 
         public Settings ModelSettings

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ComputingSystem
 {
-    class Resource
+    class Resource : INotifyPropertyChanged
     {
         public void WorkingCycle()
         {
@@ -33,8 +35,21 @@ namespace ComputingSystem
             set
             {
                 activeProcess = value;
+                OnPropertyChanged();
             }
         }
+
+        //издатель
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
         private Process activeProcess;
     }
 }
