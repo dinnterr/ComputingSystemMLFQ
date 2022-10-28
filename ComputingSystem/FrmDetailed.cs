@@ -20,7 +20,7 @@ namespace ComputingSystem
             viewDetailed.DataBind();
         }
 
-        private void workingCycle_Click(object sender, EventArgs e)
+        /*private void workingCycle_Click(object sender, EventArgs e)
         {
             /*MessageBox.Show("!!!!!");
             Model model = new Model();
@@ -35,7 +35,7 @@ namespace ComputingSystem
                 model.WorkingCycle();
                 MessageBox.Show(model.cpu.IsFree().ToString());
                // MessageBox.Show(model.device.IsFree().ToString());
-            }*/
+            }
 
             Model model = new Model();
             model.ModelSettings.Intensity = 0.8;
@@ -43,7 +43,7 @@ namespace ComputingSystem
             model.ModelSettings.MaxValueOfAddrSpace = 300;
             model.ModelSettings.MinValueOfBurstTime = 3;
             model.ModelSettings.MaxValueOfBurstTime = 7;
-            model.ModelSettings.ValueOfRAMSize = 32000;
+            model.ModelSettings.ValueOfRAM = 32000;
             model.SaveSettings();
             
             for (int i = 0; i < 20; i++)
@@ -74,24 +74,68 @@ namespace ComputingSystem
 
             }
 
-        }
-        private ViewDetailed viewDetailed
-        {
-            get;
-            set;
-        }
-
+        }*/
+     
+        private ViewDetailed viewDetailed{ get; set; }
+        public Label LblTime { get { return lblTime; } }
         public ListBox LbCPUQueue { get { return lbCPUQueue; } }
         public ListBox LbDeviceQueue { get { return lbDeviceQueue; } }
         public TextBox TbCPU { get { return tbCPU; } }
         public TextBox TbDevice { get { return tbDevice; } }
-        public TextBox TbFreeMemValue { get { return tbFreeMemValue; } }
-        public TextBox TbOccupiedMemValue { get { return tbOccupiedMemValue; } }
+        public Label LblFreeMemValue { get { return lblFreeMemValue; } }
+        public Label LblOccupiedMemValue { get { return lblOccupiedMemValue; } }
 
-        public DomainUpDown NudIntensity { get { return nudIntensity; } }
-        public DomainUpDown NudBurstMin { get { return nudBurstMin; } }
-        public DomainUpDown NudBurstMax { get { return nudBurstMax; } }
-        public DomainUpDown NudAddrSpaceMin { get { return nudAddrSpaceMin; } }
-        public DomainUpDown NudAddrSpaceMax { get { return nudAddrSpaceMax; } }
+        public ComboBox CbRamSize { get { return cbRamSize; } }
+
+        public NumericUpDown NudIntensity { get { return nudIntensity; } }
+        public NumericUpDown NudBurstMin { get { return nudBurstMin; } }
+        public NumericUpDown NudBurstMax { get { return nudBurstMax; } }
+        public NumericUpDown NudAddrSpaceMin { get { return nudAddrSpaceMin; } }
+        public NumericUpDown NudAddrSpaceMax { get { return nudAddrSpaceMax; } }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            sessionPreparation();
+            viewDetailed.ReactToUserActions(ModelOperations.SaveSettings);
+        }
+
+        private void btnWork_Click(object sender, EventArgs e)
+        {
+            viewDetailed.ReactToUserActions(ModelOperations.WorkingCycle);
+        }
+
+        private void btnSessionEnd_Click(object sender, EventArgs e)
+        {
+            viewDetailed.ReactToUserActions(ModelOperations.EndOfSession);
+            endOfSession();
+            UpdateSettings();
+        }
+
+        private void sessionPreparation()
+        {
+            btnStart.Enabled = false;
+            btnSessionEnd.Enabled = true;
+            btnWork.Enabled = rbManual.Checked;
+            pnlSettings.Enabled = false;
+        }
+
+        private void endOfSession()
+        {
+            btnSessionEnd.Enabled = false;
+            btnStart.Enabled = true;
+            btnWork.Enabled = false;
+            pnlSettings.Enabled = true;
+        }
+
+        private void UpdateSettings()
+        {
+            nudIntensity.Value = 0.5m;
+            nudBurstMin.Value = nudBurstMin.Minimum;
+            nudBurstMax.Value = nudBurstMax.Minimum;
+            nudAddrSpaceMin.Value = nudAddrSpaceMin.Minimum;
+            nudAddrSpaceMax.Value = nudAddrSpaceMax.Minimum;
+            cbRamSize.SelectedItem = cbRamSize.Items[0];
+        }
+
     }
 }

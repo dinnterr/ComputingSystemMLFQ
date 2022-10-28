@@ -28,7 +28,7 @@ namespace ComputingSystem
 
         public void SaveSettings()
         {
-            ram.Save(modelSettings.ValueOfRAMSize);
+            ram.Save(modelSettings.ValueOfRAM);
             memoryManager.Save(ram);
         }
 

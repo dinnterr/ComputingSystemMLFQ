@@ -22,9 +22,7 @@ namespace ComputingSystem
                     model.Clear();
                     break;
                 default:
-                    throw new ArgumentException(
-                        "Неизвестная операция: " + operation,
-                        "operation");
+                    throw new ArgumentException("Неизвестная операция: " + operation, "operation");
             }
         }
     }

@@ -11,6 +11,6 @@ namespace ComputingSystem
         public int MaxValueOfBurstTime { get; set; }
         public int MinValueOfAddrSpace { get; set; }
         public int MaxValueOfAddrSpace { get; set; }
-        public int ValueOfRAMSize { get; set; }
+        public int ValueOfRAM { get; set; }
     }
 }

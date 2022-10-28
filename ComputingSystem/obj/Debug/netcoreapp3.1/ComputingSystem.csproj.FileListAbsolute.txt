@@ -31,3 +31,4 @@ C:\Users\User\source\repos\ComputingSystemMLFQ\ComputingSystem\obj\Debug\netcore
 C:\Users\User\source\repos\ComputingSystemMLFQ\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.dll
 C:\Users\User\source\repos\ComputingSystemMLFQ\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.pdb
 C:\Users\User\source\repos\ComputingSystemMLFQ\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.genruntimeconfig.cache
+C:\Users\User\source\repos\ComputingSystemMLFQ\ComputingSystem\obj\Debug\netcoreapp3.1\ComputingSystem.csproj.AssemblyReference.cache
