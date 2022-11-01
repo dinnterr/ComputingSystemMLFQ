@@ -75,7 +75,7 @@ namespace ComputingSystem
         }
         private void Unsubscribe()
         {
-            model.PropertyChanged += PropertyChangedHandler;
+            model.PropertyChanged -= PropertyChangedHandler;
         }
 
         private void PropertyChangedHandler(object

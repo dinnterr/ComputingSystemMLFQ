@@ -48,7 +48,7 @@ namespace ComputingSystem
                     readyQueue = readyQueue.Put(proc);
                     if (cpu.IsFree())
                     {
-                        cpuScheduler.Session();
+                        ReadyQueue = cpuScheduler.Session();
                     }
                 }
             }
@@ -77,17 +77,17 @@ namespace ComputingSystem
                 proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime, modelSettings.MaxValueOfBurstTime + 1);
                 proc.ResetWorkTime();
                 
-                readyQueue = readyQueue.Put(proc);
+                ReadyQueue = readyQueue.Put(proc);
 
                 if(cpu.IsFree())
                 {
-                   readyQueue = cpuScheduler.Session();
+                   ReadyQueue = cpuScheduler.Session();
                    Subscribe(Cpu.ActiveProcess);
                 }
 
                 if (deviceQueue.Count != 0) 
                 {
-                   deviceQueue = deviceScheduler.Session();
+                   DeviceQueue = deviceScheduler.Session();
                    Subscribe(Device.ActiveProcess);
                 }
             }
@@ -96,7 +96,7 @@ namespace ComputingSystem
                 cpu.Clear();           
                 if(readyQueue.Count != 0)
                 {
-                   readyQueue = cpuScheduler.Session();
+                   ReadyQueue = cpuScheduler.Session();
                 }
              
                 proc.Status = processRand.Next(0, 2) == 0 ? ProcessStatus.terminated : ProcessStatus.waiting;
@@ -109,10 +109,10 @@ namespace ComputingSystem
                 {
                     proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime, modelSettings.MaxValueOfBurstTime + 1);
                     proc.ResetWorkTime();
-                    deviceQueue = deviceQueue.Put(proc);
+                    DeviceQueue = deviceQueue.Put(proc);
                     if(device.IsFree())
                     {
-                        deviceQueue = deviceScheduler.Session();
+                        DeviceQueue = deviceScheduler.Session();
                     }
                 }
             }

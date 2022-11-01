@@ -93,6 +93,8 @@ namespace ComputingSystem
         public NumericUpDown NudAddrSpaceMin { get { return nudAddrSpaceMin; } }
         public NumericUpDown NudAddrSpaceMax { get { return nudAddrSpaceMax; } }
 
+        public TableLayoutPanel TlPanelSettings { get { return tlPanelSettings; } }
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             sessionPreparation();
@@ -115,8 +117,9 @@ namespace ComputingSystem
         {
             btnStart.Enabled = false;
             btnSessionEnd.Enabled = true;
-            btnWork.Enabled = rbManual.Checked;
-            pnlSettings.Enabled = false;
+            btnWork.Enabled = true;
+            //btnWork.Enabled = rbManual.Checked;
+            TlPanelSettings.Enabled = false;
         }
 
         private void endOfSession()
@@ -124,7 +127,7 @@ namespace ComputingSystem
             btnSessionEnd.Enabled = false;
             btnStart.Enabled = true;
             btnWork.Enabled = false;
-            pnlSettings.Enabled = true;
+            TlPanelSettings.Enabled = true;
         }
 
         private void UpdateSettings()
@@ -136,6 +139,5 @@ namespace ComputingSystem
             nudAddrSpaceMax.Value = nudAddrSpaceMax.Minimum;
             cbRamSize.SelectedItem = cbRamSize.Items[0];
         }
-
     }
 }
