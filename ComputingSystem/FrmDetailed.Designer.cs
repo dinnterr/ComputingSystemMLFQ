@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tbCPU = new System.Windows.Forms.TextBox();
             this.tbDevice = new System.Windows.Forms.TextBox();
             this.lblintensity = new System.Windows.Forms.Label();
@@ -63,6 +64,7 @@
             this.lblFreeMemValue = new System.Windows.Forms.Label();
             this.lblOccupiedMemValue = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudIntensity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBurstMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAddrSpaceMin)).BeginInit();
@@ -368,6 +370,7 @@
             this.rbAuto.TabIndex = 16;
             this.rbAuto.Text = "Автоматический";
             this.rbAuto.UseVisualStyleBackColor = true;
+            this.rbAuto.CheckedChanged += new System.EventHandler(this.rbAuto_CheckedChanged);
             // 
             // rbManual
             // 
@@ -380,6 +383,7 @@
             this.rbManual.TabStop = true;
             this.rbManual.Text = "Ручной";
             this.rbManual.UseVisualStyleBackColor = true;
+            this.rbManual.CheckedChanged += new System.EventHandler(this.rbManual_CheckedChanged);
             // 
             // btnSessionEnd
             // 
@@ -550,6 +554,11 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(794, 251);
             this.tableLayoutPanel3.TabIndex = 48;
             // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.btnWork_Click);
+            // 
             // FrmDetailed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -618,6 +627,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label lblFreeMemValue;
         private System.Windows.Forms.Label lblOccupiedMemValue;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

@@ -18,6 +18,9 @@ namespace ComputingSystem
             cbRamSize.SelectedItem = cbRamSize.Items[0];
             viewDetailed = new ViewDetailed(new Model(), new Controller(), this);
             viewDetailed.DataBind();
+            btnSessionEnd.Enabled = false;
+            btnStart.Enabled = true;
+            btnWork.Enabled = false;
         }
 
         /*private void workingCycle_Click(object sender, EventArgs e)
@@ -117,8 +120,12 @@ namespace ComputingSystem
         {
             btnStart.Enabled = false;
             btnSessionEnd.Enabled = true;
-            btnWork.Enabled = true;
-            //btnWork.Enabled = rbManual.Checked;
+            //btnWork.Enabled = true;
+            btnWork.Enabled = rbManual.Checked;
+            if (rbManual.Checked == false)
+            {
+                timer.Start();
+            }
             TlPanelSettings.Enabled = false;
         }
 
@@ -128,6 +135,10 @@ namespace ComputingSystem
             btnStart.Enabled = true;
             btnWork.Enabled = false;
             TlPanelSettings.Enabled = true;
+            if(rbAuto.Checked == true)
+            {
+                timer.Stop();
+            }
         }
 
         private void UpdateSettings()
@@ -138,6 +149,24 @@ namespace ComputingSystem
             nudAddrSpaceMin.Value = nudAddrSpaceMin.Minimum;
             nudAddrSpaceMax.Value = nudAddrSpaceMax.Minimum;
             cbRamSize.SelectedItem = cbRamSize.Items[0];
+        }
+
+        private void rbAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!rbManual.Checked && btnSessionEnd.Enabled)
+            {
+                timer.Start();
+                btnWork.Enabled = false;
+            }
+        }
+
+        private void rbManual_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbManual.Checked && btnSessionEnd.Enabled)
+            {
+                timer.Stop();
+                btnWork.Enabled = true;
+            }
         }
     }
 }

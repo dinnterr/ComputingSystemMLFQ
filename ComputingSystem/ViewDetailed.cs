@@ -47,8 +47,9 @@ namespace ComputingSystem
             addrSpaceMaxBinding.ControlUpdateMode = ControlUpdateMode.Never;
             frm.NudAddrSpaceMax.DataBindings.Add(addrSpaceMaxBinding);
 
-            Binding ramSizeBinding = new Binding("SelectedItem", model.ModelSettings, "ValueOfRAM");
-            ramSizeBinding.Parse += objectToInt;
+            
+            Binding ramSizeBinding = new Binding("SelectedItem", model.ModelSettings, "ValueOfRAM", true);
+            //ramSizeBinding.Parse += objectToInt;
             ramSizeBinding.ControlUpdateMode = ControlUpdateMode.Never;
             frm.CbRamSize.DataBindings.Add(ramSizeBinding);
 
