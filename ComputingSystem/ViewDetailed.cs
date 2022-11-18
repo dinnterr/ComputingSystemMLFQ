@@ -22,7 +22,8 @@ namespace ComputingSystem
             frm.LblTime.DataBindings.Add(new Binding("Text", model.Clock, "Clock"));
 
             frm.TbCPU.DataBindings.Add(new Binding("Text", model.Cpu, "ActiveProcess"));
-            frm.TbDevice.DataBindings.Add(new Binding("Text", model.Device, "ActiveProcess"));
+            frm.TbDevice.DataBindings.Add(new Binding("Text", model.Device1, "ActiveProcess"));
+            frm.TbDevice2.DataBindings.Add(new Binding("Text", model.Device2, "ActiveProcess"));
             frm.LblFreeMemValue.DataBindings.Add(new Binding("Text", model.ram, "FreeSize"));
             frm.LblOccupiedMemValue.DataBindings.Add(new Binding("Text", model.ram, "OccupiedSize"));
 
@@ -79,22 +80,24 @@ namespace ComputingSystem
             model.PropertyChanged -= PropertyChangedHandler;
         }
 
-        private void PropertyChangedHandler(object
-                sender, PropertyChangedEventArgs e)
+        private void PropertyChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "ReadyQueue")
             {
                 updateListBox(model.ReadyQueue, frm.LbCPUQueue);
             }
-            else
+            else if (e.PropertyName == "DeviceQueue1")
             {
-                updateListBox(model.DeviceQueue, frm.LbDeviceQueue);
+                updateListBox(model.DeviceQueue1, frm.LbDeviceQueue);
+            }
+            else if (e.PropertyName == "DeviceQueue2")
+            {
+                updateListBox(model.DeviceQueue2, frm.LbDeviceQueue2);
             }
 
         }
 
-        private void updateListBox(
-                IQueueable<Process> queue, ListBox lb)
+        private void updateListBox(IQueueable<Process> queue, ListBox lb)
         {
             lb.Items.Clear();
             if (queue.Count != 0)
@@ -102,13 +105,13 @@ namespace ComputingSystem
 
         }
 
-        private void objectToInt (object sender, ConvertEventArgs cevent)
+        /*private void objectToInt (object sender, ConvertEventArgs cevent)
         {
             if(cevent.DesiredType != typeof(int))
             {
                 return;
             }
             cevent.Value = int.Parse(cevent.Value.ToString(), System.Globalization.NumberStyles.Integer, null);
-        }
+        }*/
     }
 }

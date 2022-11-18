@@ -13,15 +13,18 @@ namespace ComputingSystem
         public Model()
         {
             Clock = new SystemClock();
-            deviceQueue = new FIFOQueue<Process, SimpleArray<Process>>(new SimpleArray<Process>());
+            deviceQueue1 = new FIFOQueue<Process, SimpleArray<Process>>(new SimpleArray<Process>());
+            deviceQueue2 = new FIFOQueue<Process, SimpleArray<Process>>(new SimpleArray<Process>());
             readyQueue = new PriorityQueue<Process, BinaryHeap<Process>>(new BinaryHeap<Process>());
             modelSettings = new Settings();
             idGen = new IdGenerator();
             processRand = new Random();
             cpu = new Resource();
-            device = new Resource();
+            device1 = new Resource();
+            device2 = new Resource();
             cpuScheduler = new CPUScheduler(cpu, readyQueue);
-            deviceScheduler = new DeviceScheduler(device, deviceQueue);
+            deviceScheduler1 = new DeviceScheduler(device1, deviceQueue1);
+            deviceScheduler2 = new DeviceScheduler(device2, deviceQueue2);
             memoryManager = new MemoryManager();
             ram = new Memory();
         }
@@ -53,16 +56,19 @@ namespace ComputingSystem
                 }
             }
             cpu.WorkingCycle();
-            device.WorkingCycle();
+            device1.WorkingCycle();
+            device2.WorkingCycle();
         }
 
         public void Clear()
         {
             cpu.Clear();
-            device.Clear();
+            device1.Clear();
+            device2.Clear();
             ram.Clear();
             readyQueue = readyQueue.Clear();
-            deviceQueue = deviceQueue.Clear();
+            deviceQueue1 = deviceQueue1.Clear();
+            deviceQueue2 = deviceQueue2.Clear();
             Clock.Clear();
             idGen.Clear();
         }
@@ -72,7 +78,8 @@ namespace ComputingSystem
             Process proc = sender as Process;
             if (proc.Status == ProcessStatus.waiting) //Процесс покидает внешнее устройство
             {
-                device.Clear();
+                device1.Clear();
+                device2.Clear();
                 proc.Status = ProcessStatus.ready;
                 proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime, modelSettings.MaxValueOfBurstTime + 1);
                 proc.ResetWorkTime();
@@ -85,11 +92,17 @@ namespace ComputingSystem
                    Subscribe(Cpu.ActiveProcess);
                 }
 
-                if (deviceQueue.Count != 0) 
+                if (deviceQueue1.Count != 0) 
                 {
-                   DeviceQueue = deviceScheduler.Session();
-                   Subscribe(Device.ActiveProcess);
+                   DeviceQueue1 = deviceScheduler1.Session();
+                   Subscribe(Device1.ActiveProcess);
                 }
+
+                //if (deviceQueue2.Count != 0)
+                //{
+                //    DeviceQueue2 = deviceScheduler2.Session();
+                //    Subscribe(Device2.ActiveProcess);
+                //}
             }
             else //Процесс покидает процессор
             {
@@ -109,10 +122,15 @@ namespace ComputingSystem
                 {
                     proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime, modelSettings.MaxValueOfBurstTime + 1);
                     proc.ResetWorkTime();
-                    DeviceQueue = deviceQueue.Put(proc);
-                    if(device.IsFree())
+                    DeviceQueue1 = deviceQueue1.Put(proc);
+                    DeviceQueue2 = deviceQueue2.Put(proc);
+                    if (device1.IsFree())
                     {
-                        DeviceQueue = deviceScheduler.Session();
+                        DeviceQueue1 = deviceScheduler1.Session();
+                    }
+                    else
+                    {
+                        DeviceQueue2 = deviceScheduler2.Session();
                     }
                 }
             }
@@ -146,12 +164,15 @@ namespace ComputingSystem
 
         public readonly SystemClock Clock;
         private Resource cpu;
-        private Resource device;
+        private Resource device1;//
+        private Resource device2;
         private IdGenerator idGen;
-        private IQueueable<Process> deviceQueue;
+        private IQueueable<Process> deviceQueue1;//
+        private IQueueable<Process> deviceQueue2;
         private IQueueable<Process> readyQueue;
         private CPUScheduler cpuScheduler;
-        private DeviceScheduler deviceScheduler;
+        private DeviceScheduler deviceScheduler1;
+        private DeviceScheduler deviceScheduler2;
         private MemoryManager memoryManager;
         private Settings modelSettings;
         private Random processRand;
@@ -167,12 +188,22 @@ namespace ComputingSystem
             }
         }
 
-        public IQueueable<Process> DeviceQueue
+        public IQueueable<Process> DeviceQueue1
         {
-            get { return deviceQueue; }
+            get { return deviceQueue1; }
             set 
             { 
-                deviceQueue = value;
+                deviceQueue1 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public IQueueable<Process> DeviceQueue2
+        {
+            get { return deviceQueue2; }
+            set
+            {
+                deviceQueue2 = value;
                 OnPropertyChanged();
             }
         }
@@ -182,9 +213,14 @@ namespace ComputingSystem
             get { return modelSettings; }
         }
 
-        public Resource Device
+        public Resource Device1
         {
-            get { return device; }
+            get { return device1; }
+        }
+
+        public Resource Device2
+        {
+            get { return device2; }
         }
 
         public Resource Cpu
