@@ -11,12 +11,12 @@ namespace ComputingSystem
         public void Save(long size)
         {
             Size = size;
-            occupiedSize = 0;
+            OccupiedSize = 0;
            // FreeSize = size;
         }
         public void Clear()
         {
-            occupiedSize = 0;
+            OccupiedSize = 0;
             Size = 0;
         }
         public long Size

@@ -33,22 +33,21 @@ namespace ComputingSystem
 
         public void SaveSettings()
         {
-            ram.Save(modelSettings.ValueOfRAM);
+            ram.Save(ModelSettings.ValueOfRAM);
             memoryManager.Save(ram);
         }
 
         public void WorkingCycle()
         {
             Clock.WorkingCycle();
-            if (processRand.NextDouble() <= modelSettings.Intensity)
+            if (processRand.NextDouble() <= ModelSettings.Intensity)
             {
                 Process proc = new Process(idGen.Id,
-                    processRand.Next(modelSettings.MinValueOfAddrSpace, modelSettings.MaxValueOfAddrSpace + 1));
+                    processRand.Next(ModelSettings.MinValueOfAddrSpace, ModelSettings.MaxValueOfAddrSpace + 1));
                 if (memoryManager.Allocate(proc) != null)
                 {
 
-                    proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime,
-                        modelSettings.MaxValueOfBurstTime + 1);
+                    proc.BurstTime = processRand.Next(ModelSettings.MinValueOfBurstTime, ModelSettings.MaxValueOfBurstTime + 1);
                     Subscribe(proc);
                     readyQueue = readyQueue.Put(proc);
                     if (cpu.IsFree())

@@ -430,7 +430,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnStart.AutoSize = true;
             this.btnStart.Location = new System.Drawing.Point(471, 3);
             this.btnStart.Name = "btnStart";
@@ -660,7 +660,7 @@
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tlPanelSettings);
             this.Controls.Add(this.pnlSettings);
-            this.MinimumSize = new System.Drawing.Size(910, 500);
+            this.MinimumSize = new System.Drawing.Size(910, 606);
             this.Name = "FrmDetailed";
             this.Text = "Системное программное обеспечение: курсовая работа";
             ((System.ComponentModel.ISupportInitialize)(this.nudIntensity)).EndInit();
