@@ -29,8 +29,12 @@ namespace ComputingSystem
         public ListBox LbDeviceQueue { get { return lbDeviceQueue; } }
         public ListBox LbDeviceQueue2 { get { return lbDeviceQueue2; } }
         public TextBox TbCPU { get { return tbCPU; } }
-        public TextBox TbDevice { get { return tbDevice; } }
+        public TextBox TbDevice1 { get { return tbDevice1; } }
         public TextBox TbDevice2 { get { return tbDevice2; } }
+
+        public TextBox TbCpuUtil { get { return tbCpuUtil; } }
+        public TextBox TbProductivity { get { return tbProductivity; } }
+        
         public Label LblFreeMemValue { get { return lblFreeMemValue; } }
         public Label LblOccupiedMemValue { get { return lblOccupiedMemValue; } }
         public ComboBox CbRamSize { get { return cbRamSize; } }

@@ -22,8 +22,9 @@ namespace ComputingSystem
             frm.LblTime.DataBindings.Add(new Binding("Text", model.Clock, "Clock"));
 
             frm.TbCPU.DataBindings.Add(new Binding("Text", model.Cpu, "ActiveProcess"));
-            frm.TbDevice.DataBindings.Add(new Binding("Text", model.Device1, "ActiveProcess"));
+            frm.TbDevice1.DataBindings.Add(new Binding("Text", model.Device1, "ActiveProcess"));
             frm.TbDevice2.DataBindings.Add(new Binding("Text", model.Device2, "ActiveProcess"));
+
             frm.LblFreeMemValue.DataBindings.Add(new Binding("Text", model.ram, "FreeSize"));
             frm.LblOccupiedMemValue.DataBindings.Add(new Binding("Text", model.ram, "OccupiedSize"));
 
@@ -53,6 +54,12 @@ namespace ComputingSystem
             //ramSizeBinding.Parse += objectToInt;
             ramSizeBinding.ControlUpdateMode = ControlUpdateMode.Never;
             frm.CbRamSize.DataBindings.Add(ramSizeBinding);
+
+            Binding CpuUtilBinding = new Binding("Text", model.statistics, "CpuUtilization", true, DataSourceUpdateMode.Never, null, "#0.##%");
+            frm.TbCpuUtil.DataBindings.Add(CpuUtilBinding);
+
+            Binding CpuProductivityBinding = new Binding("Text", model.statistics, "Throughput", true, DataSourceUpdateMode.Never, null, "#0.##%");
+            frm.TbProductivity.DataBindings.Add(CpuProductivityBinding);
 
             Subscribe();
         }
@@ -86,15 +93,11 @@ namespace ComputingSystem
             {
                 updateListBox(model.ReadyQueue, frm.LbCPUQueue);
             }
-            else if (e.PropertyName == "DeviceQueue1")
+            else
             {
                 updateListBox(model.DeviceQueue1, frm.LbDeviceQueue);
-            }
-            else if (e.PropertyName == "DeviceQueue2")
-            {
                 updateListBox(model.DeviceQueue2, frm.LbDeviceQueue2);
             }
-
         }
 
         private void updateListBox(IQueueable<Process> queue, ListBox lb)

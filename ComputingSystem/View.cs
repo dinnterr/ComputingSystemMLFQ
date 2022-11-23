@@ -18,8 +18,7 @@ namespace ComputingSystem
             private get;
             set;
         }
-        public void ReactToUserActions(ModelOperations
-                                       modelOperation)
+        public void ReactToUserActions(ModelOperations modelOperation)
         {
             controller.Execute(modelOperation, model);
         }

@@ -8,8 +8,26 @@ namespace ComputingSystem
 {
     class MLFQ
     {
-        private FIFOQueue<Process, SimpleArray<Process>> queue;
+        public MLFQ()
+        {
+            queue = new FIFOQueue<Process, SimpleArray<Process>>[4];
+        }
 
+        public void Put (Process p)
+        {
+           queue[0].Put(p);
+          // return queue;
+        }
 
+        public void Clear()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                queue[i].Clear();
+            }
+        }
+
+       
+        private FIFOQueue<Process, SimpleArray<Process>>[] queue;
     }
 }

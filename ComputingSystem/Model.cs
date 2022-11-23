@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace ComputingSystem
 {
-      class Model : INotifyPropertyChanged
+    class Model : INotifyPropertyChanged
     {
         public Model()
         {
@@ -27,6 +27,8 @@ namespace ComputingSystem
             deviceScheduler2 = new DeviceScheduler(device2, deviceQueue2);
             memoryManager = new MemoryManager();
             ram = new Memory();
+
+            statistics = new Statistics(Clock);
         }
 
         public void SaveSettings()
@@ -42,9 +44,9 @@ namespace ComputingSystem
             {
                 Process proc = new Process(idGen.Id,
                     processRand.Next(modelSettings.MinValueOfAddrSpace, modelSettings.MaxValueOfAddrSpace + 1));
-               if (memoryManager.Allocate(proc) != null)
-               {
-                    
+                if (memoryManager.Allocate(proc) != null)
+                {
+
                     proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime,
                         modelSettings.MaxValueOfBurstTime + 1);
                     Subscribe(proc);
@@ -58,6 +60,13 @@ namespace ComputingSystem
             cpu.WorkingCycle();
             device1.WorkingCycle();
             device2.WorkingCycle();
+
+            if (Cpu.IsFree())
+            {
+                statistics.IncCPUFreeTime();
+            }
+            statistics.IncArrivalProcCount();
+
         }
 
         public void Clear()
@@ -71,9 +80,11 @@ namespace ComputingSystem
             deviceQueue2 = deviceQueue2.Clear();
             Clock.Clear();
             idGen.Clear();
+            statistics.Clear();
+
         }
 
-        private void FreeingResourceEventHandler (object sender, EventArgs e)
+        private void FreeingResourceEventHandler(object sender, EventArgs e)
         {
             Process proc = sender as Process;
             if (proc.Status == ProcessStatus.waiting) //Процесс покидает внешнее устройство
@@ -81,46 +92,45 @@ namespace ComputingSystem
                 device1.Clear();
                 device2.Clear();
                 proc.Status = ProcessStatus.ready;
-                proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime, modelSettings.MaxValueOfBurstTime + 1);
+                proc.BurstTime = processRand.Next(ModelSettings.MinValueOfBurstTime, ModelSettings.MaxValueOfBurstTime + 1);
                 proc.ResetWorkTime();
-                
+
                 ReadyQueue = readyQueue.Put(proc);
 
-                if(cpu.IsFree())
+                if (cpu.IsFree())
                 {
-                   ReadyQueue = cpuScheduler.Session();
-                   Subscribe(Cpu.ActiveProcess);
+                    ReadyQueue = cpuScheduler.Session();
+                    Subscribe(Cpu.ActiveProcess);
                 }
 
-                if (deviceQueue1.Count != 0) 
+                if (deviceQueue1.Count != 0)
                 {
-                   DeviceQueue1 = deviceScheduler1.Session();
-                   Subscribe(Device1.ActiveProcess);
+                    DeviceQueue1 = deviceScheduler1.Session();
+                    Subscribe(Device1.ActiveProcess);
+                } else if (deviceQueue2.Count != 0)//
+                {
+                    DeviceQueue2 = deviceScheduler2.Session();
+                    Subscribe(Device2.ActiveProcess);
                 }
-
-                //if (deviceQueue2.Count != 0)
-                //{
-                //    DeviceQueue2 = deviceScheduler2.Session();
-                //    Subscribe(Device2.ActiveProcess);
-                //}
             }
             else //Процесс покидает процессор
             {
-                cpu.Clear();           
-                if(readyQueue.Count != 0)
+                cpu.Clear();
+                if (readyQueue.Count != 0)
                 {
-                   ReadyQueue = cpuScheduler.Session();
+                    ReadyQueue = cpuScheduler.Session();
                 }
-             
+
                 proc.Status = processRand.Next(0, 2) == 0 ? ProcessStatus.terminated : ProcessStatus.waiting;
-                if(proc.Status == ProcessStatus.terminated)
+                if (proc.Status == ProcessStatus.terminated)
                 {
                     memoryManager.Free(proc);
                     Unsubscribe(proc);
+                    statistics.IncTerminatedProcCount();
                 }
                 else
                 {
-                    proc.BurstTime = processRand.Next(modelSettings.MinValueOfBurstTime, modelSettings.MaxValueOfBurstTime + 1);
+                    proc.BurstTime = processRand.Next(ModelSettings.MinValueOfBurstTime, ModelSettings.MaxValueOfBurstTime + 1);
                     proc.ResetWorkTime();
                     DeviceQueue1 = deviceQueue1.Put(proc);
                     DeviceQueue2 = deviceQueue2.Put(proc);
@@ -178,11 +188,14 @@ namespace ComputingSystem
         private Random processRand;
         public readonly Memory ram;
 
+        public readonly Statistics statistics;
+
+
         public IQueueable<Process> ReadyQueue
         {
             get { return readyQueue; }
-            set 
-            { 
+            set
+            {
                 readyQueue = value;
                 OnPropertyChanged();
             }
@@ -191,8 +204,8 @@ namespace ComputingSystem
         public IQueueable<Process> DeviceQueue1
         {
             get { return deviceQueue1; }
-            set 
-            { 
+            set
+            {
                 deviceQueue1 = value;
                 OnPropertyChanged();
             }

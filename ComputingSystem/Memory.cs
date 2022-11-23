@@ -12,7 +12,7 @@ namespace ComputingSystem
         {
             Size = size;
             occupiedSize = 0;
-            //FreeSize = size;
+           // FreeSize = size;
         }
         public void Clear()
         {

@@ -29,7 +29,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tbCPU = new System.Windows.Forms.TextBox();
-            this.tbDevice = new System.Windows.Forms.TextBox();
+            this.tbDevice1 = new System.Windows.Forms.TextBox();
             this.lblintensity = new System.Windows.Forms.Label();
             this.lblMinBurstTime = new System.Windows.Forms.Label();
             this.lblMaxBurstTime = new System.Windows.Forms.Label();
@@ -58,6 +58,10 @@
             this.btnWork = new System.Windows.Forms.Button();
             this.lblTime = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
+            this.tbProductivity = new System.Windows.Forms.TextBox();
+            this.lblPerformance = new System.Windows.Forms.Label();
+            this.tbCpuUtil = new System.Windows.Forms.TextBox();
+            this.hardCPU = new System.Windows.Forms.Label();
             this.tlPanelSettings = new System.Windows.Forms.TableLayoutPanel();
             this.nudBurstMin = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -83,20 +87,20 @@
             // tbCPU
             // 
             this.tbCPU.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbCPU.Location = new System.Drawing.Point(3, 27);
+            this.tbCPU.Location = new System.Drawing.Point(3, 36);
             this.tbCPU.Name = "tbCPU";
             this.tbCPU.ReadOnly = true;
             this.tbCPU.Size = new System.Drawing.Size(289, 23);
             this.tbCPU.TabIndex = 2;
             // 
-            // tbDevice
+            // tbDevice1
             // 
-            this.tbDevice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbDevice.Location = new System.Drawing.Point(298, 27);
-            this.tbDevice.Name = "tbDevice";
-            this.tbDevice.ReadOnly = true;
-            this.tbDevice.Size = new System.Drawing.Size(289, 23);
-            this.tbDevice.TabIndex = 3;
+            this.tbDevice1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbDevice1.Location = new System.Drawing.Point(298, 36);
+            this.tbDevice1.Name = "tbDevice1";
+            this.tbDevice1.ReadOnly = true;
+            this.tbDevice1.Size = new System.Drawing.Size(289, 23);
+            this.tbDevice1.TabIndex = 3;
             // 
             // lblintensity
             // 
@@ -173,7 +177,7 @@
             // lblCpuQueue
             // 
             this.lblCpuQueue.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCpuQueue.Location = new System.Drawing.Point(3, 62);
+            this.lblCpuQueue.Location = new System.Drawing.Point(3, 67);
             this.lblCpuQueue.Name = "lblCpuQueue";
             this.lblCpuQueue.Size = new System.Drawing.Size(289, 16);
             this.lblCpuQueue.TabIndex = 28;
@@ -182,36 +186,36 @@
             // lblDeviceQueue
             // 
             this.lblDeviceQueue.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblDeviceQueue.Location = new System.Drawing.Point(298, 62);
+            this.lblDeviceQueue.Location = new System.Drawing.Point(298, 67);
             this.lblDeviceQueue.Name = "lblDeviceQueue";
-            this.lblDeviceQueue.Size = new System.Drawing.Size(289, 16);
+            this.lblDeviceQueue.Size = new System.Drawing.Size(289, 25);
             this.lblDeviceQueue.TabIndex = 29;
             this.lblDeviceQueue.Text = "Очередь к внешнему устройству 1";
             // 
             // lblRam
             // 
-            this.lblRam.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblRam.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblRam.Location = new System.Drawing.Point(3, 0);
             this.lblRam.Name = "lblRam";
-            this.lblRam.Size = new System.Drawing.Size(217, 15);
+            this.lblRam.Size = new System.Drawing.Size(217, 20);
             this.lblRam.TabIndex = 30;
             this.lblRam.Text = "Оперативная память";
             // 
             // lblFreeRamSize
             // 
-            this.lblFreeRamSize.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblFreeRamSize.Location = new System.Drawing.Point(3, 15);
+            this.lblFreeRamSize.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblFreeRamSize.Location = new System.Drawing.Point(61, 23);
             this.lblFreeRamSize.Name = "lblFreeRamSize";
-            this.lblFreeRamSize.Size = new System.Drawing.Size(217, 13);
+            this.lblFreeRamSize.Size = new System.Drawing.Size(159, 22);
             this.lblFreeRamSize.TabIndex = 31;
             this.lblFreeRamSize.Text = "Размер свободной памяти:";
             // 
             // lblOccupiedSize
             // 
-            this.lblOccupiedSize.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblOccupiedSize.Location = new System.Drawing.Point(449, 15);
+            this.lblOccupiedSize.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblOccupiedSize.Location = new System.Drawing.Point(449, 23);
             this.lblOccupiedSize.Name = "lblOccupiedSize";
-            this.lblOccupiedSize.Size = new System.Drawing.Size(217, 36);
+            this.lblOccupiedSize.Size = new System.Drawing.Size(217, 22);
             this.lblOccupiedSize.TabIndex = 32;
             this.lblOccupiedSize.Text = "Размер памяти, занятой процессами:";
             // 
@@ -329,9 +333,9 @@
             this.lbCPUQueue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbCPUQueue.FormattingEnabled = true;
             this.lbCPUQueue.ItemHeight = 15;
-            this.lbCPUQueue.Location = new System.Drawing.Point(3, 88);
+            this.lbCPUQueue.Location = new System.Drawing.Point(3, 95);
             this.lbCPUQueue.Name = "lbCPUQueue";
-            this.lbCPUQueue.Size = new System.Drawing.Size(289, 160);
+            this.lbCPUQueue.Size = new System.Drawing.Size(289, 238);
             this.lbCPUQueue.TabIndex = 30;
             // 
             // lbDeviceQueue
@@ -339,9 +343,9 @@
             this.lbDeviceQueue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbDeviceQueue.FormattingEnabled = true;
             this.lbDeviceQueue.ItemHeight = 15;
-            this.lbDeviceQueue.Location = new System.Drawing.Point(298, 88);
+            this.lbDeviceQueue.Location = new System.Drawing.Point(298, 95);
             this.lbDeviceQueue.Name = "lbDeviceQueue";
-            this.lbDeviceQueue.Size = new System.Drawing.Size(289, 160);
+            this.lbDeviceQueue.Size = new System.Drawing.Size(289, 238);
             this.lbDeviceQueue.TabIndex = 31;
             // 
             // pnlSettings
@@ -356,15 +360,15 @@
             this.pnlSettings.Controls.Add(this.lblTime);
             this.pnlSettings.Controls.Add(this.btnStart);
             this.pnlSettings.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlSettings.Location = new System.Drawing.Point(0, 397);
+            this.pnlSettings.Location = new System.Drawing.Point(0, 515);
             this.pnlSettings.Name = "pnlSettings";
-            this.pnlSettings.Size = new System.Drawing.Size(894, 64);
+            this.pnlSettings.Size = new System.Drawing.Size(894, 52);
             this.pnlSettings.TabIndex = 33;
             // 
             // rbAuto
             // 
             this.rbAuto.AutoSize = true;
-            this.rbAuto.Location = new System.Drawing.Point(166, 37);
+            this.rbAuto.Location = new System.Drawing.Point(166, 26);
             this.rbAuto.Name = "rbAuto";
             this.rbAuto.Size = new System.Drawing.Size(117, 19);
             this.rbAuto.TabIndex = 16;
@@ -376,7 +380,7 @@
             // 
             this.rbManual.AutoSize = true;
             this.rbManual.Checked = true;
-            this.rbManual.Location = new System.Drawing.Point(94, 38);
+            this.rbManual.Location = new System.Drawing.Point(94, 26);
             this.rbManual.Name = "rbManual";
             this.rbManual.Size = new System.Drawing.Size(66, 19);
             this.rbManual.TabIndex = 15;
@@ -388,7 +392,7 @@
             // btnSessionEnd
             // 
             this.btnSessionEnd.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSessionEnd.Location = new System.Drawing.Point(751, 15);
+            this.btnSessionEnd.Location = new System.Drawing.Point(758, 3);
             this.btnSessionEnd.Name = "btnSessionEnd";
             this.btnSessionEnd.Size = new System.Drawing.Size(129, 42);
             this.btnSessionEnd.TabIndex = 13;
@@ -398,7 +402,7 @@
             // 
             // lblMode
             // 
-            this.lblMode.Location = new System.Drawing.Point(94, 14);
+            this.lblMode.Location = new System.Drawing.Point(94, 4);
             this.lblMode.Name = "lblMode";
             this.lblMode.Size = new System.Drawing.Size(91, 19);
             this.lblMode.TabIndex = 33;
@@ -407,7 +411,7 @@
             // btnWork
             // 
             this.btnWork.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnWork.Location = new System.Drawing.Point(615, 15);
+            this.btnWork.Location = new System.Drawing.Point(622, 3);
             this.btnWork.Name = "btnWork";
             this.btnWork.Size = new System.Drawing.Size(130, 42);
             this.btnWork.TabIndex = 12;
@@ -418,7 +422,7 @@
             // lblTime
             // 
             this.lblTime.AutoSize = true;
-            this.lblTime.Location = new System.Drawing.Point(34, 28);
+            this.lblTime.Location = new System.Drawing.Point(24, 16);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(13, 15);
             this.lblTime.TabIndex = 34;
@@ -426,15 +430,53 @@
             // 
             // btnStart
             // 
-            this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnStart.AutoSize = true;
-            this.btnStart.Location = new System.Drawing.Point(464, 15);
+            this.btnStart.Location = new System.Drawing.Point(471, 3);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(145, 41);
             this.btnStart.TabIndex = 11;
             this.btnStart.Text = "Сохранение настроек";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // tbProductivity
+            // 
+            this.tbProductivity.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tbProductivity.Location = new System.Drawing.Point(746, 55);
+            this.tbProductivity.Name = "tbProductivity";
+            this.tbProductivity.ReadOnly = true;
+            this.tbProductivity.Size = new System.Drawing.Size(70, 23);
+            this.tbProductivity.TabIndex = 38;
+            // 
+            // lblPerformance
+            // 
+            this.lblPerformance.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblPerformance.AutoSize = true;
+            this.lblPerformance.Location = new System.Drawing.Point(543, 59);
+            this.lblPerformance.Name = "lblPerformance";
+            this.lblPerformance.Size = new System.Drawing.Size(123, 15);
+            this.lblPerformance.TabIndex = 37;
+            this.lblPerformance.Text = "Производительность";
+            // 
+            // tbCpuUtil
+            // 
+            this.tbCpuUtil.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tbCpuUtil.Location = new System.Drawing.Point(299, 55);
+            this.tbCpuUtil.Name = "tbCpuUtil";
+            this.tbCpuUtil.ReadOnly = true;
+            this.tbCpuUtil.Size = new System.Drawing.Size(70, 23);
+            this.tbCpuUtil.TabIndex = 36;
+            // 
+            // hardCPU
+            // 
+            this.hardCPU.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.hardCPU.AutoSize = true;
+            this.hardCPU.Location = new System.Drawing.Point(60, 59);
+            this.hardCPU.Name = "hardCPU";
+            this.hardCPU.Size = new System.Drawing.Size(160, 15);
+            this.hardCPU.TabIndex = 35;
+            this.hardCPU.Text = "Загруженность процессора";
             // 
             // tlPanelSettings
             // 
@@ -496,25 +538,30 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.Controls.Add(this.tbProductivity, 3, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblFreeRamSize, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblPerformance, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblRam, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblOccupiedSize, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tbCpuUtil, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.hardCPU, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblFreeMemValue, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblOccupiedMemValue, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblOccupiedSize, 2, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 346);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 431);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.41176F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70.58823F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(894, 51);
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.81633F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 59.18367F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(894, 84);
             this.tableLayoutPanel2.TabIndex = 47;
             // 
             // lblFreeMemValue
             // 
             this.lblFreeMemValue.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFreeMemValue.AutoSize = true;
-            this.lblFreeMemValue.Location = new System.Drawing.Point(328, 25);
+            this.lblFreeMemValue.Location = new System.Drawing.Point(328, 27);
             this.lblFreeMemValue.Name = "lblFreeMemValue";
             this.lblFreeMemValue.Size = new System.Drawing.Size(13, 15);
             this.lblFreeMemValue.TabIndex = 33;
@@ -524,7 +571,7 @@
             // 
             this.lblOccupiedMemValue.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblOccupiedMemValue.AutoSize = true;
-            this.lblOccupiedMemValue.Location = new System.Drawing.Point(775, 25);
+            this.lblOccupiedMemValue.Location = new System.Drawing.Point(775, 27);
             this.lblOccupiedMemValue.Name = "lblOccupiedMemValue";
             this.lblOccupiedMemValue.Size = new System.Drawing.Size(13, 15);
             this.lblOccupiedMemValue.TabIndex = 34;
@@ -538,7 +585,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
             this.tableLayoutPanel3.Controls.Add(this.lbDeviceQueue, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.lbCPUQueue, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.tbDevice, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tbDevice1, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.lblCpuQueue, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.lblDevice, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.tbCPU, 0, 1);
@@ -553,10 +600,10 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 4;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.829061F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.38461F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.401711F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65.38462F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(894, 251);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.11905F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.440476F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.02381F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(894, 336);
             this.tableLayoutPanel3.TabIndex = 48;
             // 
             // lblDevice2
@@ -565,7 +612,7 @@
             this.lblDevice2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDevice2.Location = new System.Drawing.Point(593, 0);
             this.lblDevice2.Name = "lblDevice2";
-            this.lblDevice2.Size = new System.Drawing.Size(298, 24);
+            this.lblDevice2.Size = new System.Drawing.Size(298, 33);
             this.lblDevice2.TabIndex = 32;
             this.lblDevice2.Text = "Внешнее устройство 2";
             // 
@@ -573,9 +620,9 @@
             // 
             this.lblDeviceQueue2.AutoSize = true;
             this.lblDeviceQueue2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDeviceQueue2.Location = new System.Drawing.Point(593, 62);
+            this.lblDeviceQueue2.Location = new System.Drawing.Point(593, 67);
             this.lblDeviceQueue2.Name = "lblDeviceQueue2";
-            this.lblDeviceQueue2.Size = new System.Drawing.Size(298, 23);
+            this.lblDeviceQueue2.Size = new System.Drawing.Size(298, 25);
             this.lblDeviceQueue2.TabIndex = 33;
             this.lblDeviceQueue2.Text = "Очередь к внешнему устройству 2";
             // 
@@ -584,15 +631,15 @@
             this.lbDeviceQueue2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbDeviceQueue2.FormattingEnabled = true;
             this.lbDeviceQueue2.ItemHeight = 15;
-            this.lbDeviceQueue2.Location = new System.Drawing.Point(593, 88);
+            this.lbDeviceQueue2.Location = new System.Drawing.Point(593, 95);
             this.lbDeviceQueue2.Name = "lbDeviceQueue2";
-            this.lbDeviceQueue2.Size = new System.Drawing.Size(298, 160);
+            this.lbDeviceQueue2.Size = new System.Drawing.Size(298, 238);
             this.lbDeviceQueue2.TabIndex = 34;
             // 
             // tbDevice2
             // 
             this.tbDevice2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbDevice2.Location = new System.Drawing.Point(593, 27);
+            this.tbDevice2.Location = new System.Drawing.Point(593, 36);
             this.tbDevice2.Name = "tbDevice2";
             this.tbDevice2.ReadOnly = true;
             this.tbDevice2.Size = new System.Drawing.Size(298, 23);
@@ -608,7 +655,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(894, 461);
+            this.ClientSize = new System.Drawing.Size(894, 567);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tlPanelSettings);
@@ -635,7 +682,7 @@
 
         #endregion
         private System.Windows.Forms.TextBox tbCPU;
-        private System.Windows.Forms.TextBox tbDevice;
+        private System.Windows.Forms.TextBox tbDevice1;
         private System.Windows.Forms.Label lblintensity;
         private System.Windows.Forms.Label lblMinBurstTime;
         private System.Windows.Forms.Label lblMaxBurstTime;
@@ -676,6 +723,10 @@
         private System.Windows.Forms.Label lblDeviceQueue2;
         private System.Windows.Forms.ListBox lbDeviceQueue2;
         private System.Windows.Forms.TextBox tbDevice2;
+        private System.Windows.Forms.TextBox tbCpuUtil;
+        private System.Windows.Forms.Label hardCPU;
+        private System.Windows.Forms.TextBox tbProductivity;
+        private System.Windows.Forms.Label lblPerformance;
     }
 }
 
